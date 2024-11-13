@@ -1,0 +1,26 @@
+
+{% extends "base.html" %}
+{% block content %}
+<div class="container mx-auto mt-8">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {% for hostel in hostels %}
+            <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow">
+                <a href="#">
+                    <img class="rounded-t-lg" src="{{ hostel.image.url }}"  alt="Hostel Image" />
+                </a>
+                <div class="p-5">
+                    <a href="#">
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">{{ hostel.name }}</h5>
+                    </a>
+                    <p class="mb-3 font-normal text-gray-700">{{ hostel.description }}</p>
+                    <div class="flex justify-between items-center">
+                        <p class="text-gray-700">Location: {{ hostel.location }}</p>
+                        <p class="text-gray-700">Price: ${{ hostel.price_per_night }}</p>
+                    </div>
+                    <a href="{% url 'hostelapp:hostel_detail' hostel.pk %}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-purple-700 rounded-lg hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300">Read More</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
