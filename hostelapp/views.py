@@ -1,7 +1,9 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import get_object_or_404, render,redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
+
+from .models import Hostel
 
 
 def home(request):
@@ -25,3 +27,12 @@ def authView(request):
     else:
         form = UserCreationForm()
     return render(request, "registration/signup.html", {"form": form})
+
+
+def hostel_list(request):
+    hostels=Hostel.objects.all()
+    return render(request,'hostel_pages/hostel_list.html',{'hostels':hostels})
+
+def hostel_detail(request, pk): 
+    hostel = get_object_or_404(Hostel, pk=pk) 
+    return render(request, 'hostel_pages/hostel_detail.html', {'hostel': hostel})
