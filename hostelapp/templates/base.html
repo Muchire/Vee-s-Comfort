@@ -1,0 +1,49 @@
+{% load compress %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Vee's Comfort </title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'src/input.css' %}">
+    {% compress css %}
+    <link rel="stylesheet" href="{% static 'src/output.css' %}">
+    {% endcompress %}
+</head>
+
+<body class="bg-purple-300">
+
+    <header class="text-white bg-purple-400">
+        <nav class="container mx-auto py-4 flex justify-between">
+            <a href="{% url 'hostelapp:index' %}" class="font-bold text-4xl hover:text-purple-900">Vee's Comfort</a>
+            <ul class="flex space-x-4">
+                <li><a href="{% url 'hostelapp:index' %}" class="hover:text-purple-900">Home</a></li>
+                <li><a href="#" class="hover:text-purple-900">About</a></li>
+                <li><a href="#" class="hover:text-purple-900">Contact</a></li>
+                <li><a href="#" class="hover:text-purple-900">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container mx-auto mt-4 text-purple-900">
+        {% block content %}
+        {% endblock content %}
+    </div>
+
+    <footer class="text-white bg-purple-400 mt-8">
+        <div class="container mx-auto py-4 text-center">
+            <p>&copy; 2024 Vee's Comfort</p>
+            <ul class="flex justify-center space-x-4 mt-4">
+                <li><a href="#" class="hover:text-purple-900">Instagram</a></li>
+            </ul>
+        </div>
+    </footer>
+
+</body>
+
+</html>
