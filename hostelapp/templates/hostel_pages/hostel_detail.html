@@ -1,16 +1,16 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-<div class="container mx-auto mt-8">
-    <h1 class="text-4xl font-bold text-purple-900">{{ hostel.name }}</h1>
-    <p class="mt-4 text-xl text-purple-900">{{ hostel.description }}</p>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
-        {% for image in hostel.images.all %}
-        <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow">
-            <img class="rounded-t-lg" src="{{ image.image.url }}" alt="Hostel Image" />
+    <div class="container mx-auto mt-8">
+        <h1 class="text-4xl font-bold text-purple-900">{{ hostel.name }}</h1>
+        <p class="mt-4 text-xl text-purple-900">{{ hostel.description }}</p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
+            {% for image in hostel.images.all %}
+            <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow">
+                <img class="rounded-t-lg" src="{{ image.image.url }}" alt="Hostel Image" />
+            </div>
+            {% endfor %}
         </div>
-        {% endfor %}
+        <a href="{% url 'hostelapp:book_hostel' hostel.pk%}" class="mt-8 inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-purple-700 rounded-lg hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300">Check Availability & Book</a>
     </div>
-    <a href="#"" class="mt-8 inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-purple-700 rounded-lg hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300">Check Availability & Book</a>
-</div>
 {% endblock %}

@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="container mx-auto mt-8 text-center">
+    <h1 class="text-4xl font-bold text-purple-900 mb-8">Booking Confirmation</h1>
+    <p class="text-xl text-purple-900">Thank you for booking at {{ booking.hostel.name }}. Here are your booking details:</p>
+    <ul class="mt-4 text-lg text-purple-900">
+        <li>Check-in: {{ booking.check_in }}</li>
+        <li>Check-out: {{ booking.check_out }}</li>
+        <li> Your total price is {{booking.total_price}}</li>
+    </ul>
+    <h2 class="text-4xl font-bold text-purple-900 mb-8"> We can't wait to meet you</h2>
+</div>
+{% endblock %}
