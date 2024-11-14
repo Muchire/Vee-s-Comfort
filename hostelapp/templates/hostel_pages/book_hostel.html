@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<div class="container mx-auto mt-8">
+    <h1 class="text-4xl font-bold text-purple-900 mb-8">Book Your Stay at {{ hostel.name }}</h1>
+    <form method="post" class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="bg-purple-400 hover:bg-purple-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Book Now</button>
+    </form>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+        <div class="flex flex-col items-start mt-8">
+            <img class="rounded-t-lg float-right mr-4 mb-4" src="{% static 'images/Hostel6.jpeg' %}" alt="Card Image 1" />
+        </div>
+
+        <div class="flex flex-col items-start mt-8">
+            <img class="rounded-t-lg float-right mr-4 mb-4" src="{% static 'images/hostel7.jpeg' %}" alt="Card Image 1" />
+        </div>
+
+
+        <div class="flex flex-col items-start mt-8">
+            <img class="rounded-t-lg float-right mr-4 mb-4" src="{% static 'images/hostel8.jpeg' %}" alt="Card Image 1" />
+        </div>
+    </div>
+</div>
+{% endblock %}
