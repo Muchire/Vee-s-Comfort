@@ -28,7 +28,7 @@ def authView(request):
         form = UserCreationForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('login')  # Redirect after successful registration
+            return redirect('registration/login.html')  # Redirect after successful registration
     else:
         form = UserCreationForm()
     return render(request, "registration/signup.html", {"form": form})
