@@ -132,8 +132,22 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-LOGIN_REDIRECT_URL = "base:home"
-LOGOUT_REDIRECT_URL = "base:login"
-
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+AUTHENTICATION_BACKENDS = (
+    # 'hostelapp.backends.EmailOrUsernameBackend',  # Replace 'your_app_name' with the name of your app
+    'django.contrib.auth.backends.ModelBackend',
+)
+#email
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'your_email@example.com'
+EMAIL_HOST_PASSWORD = 'tsjx scbx kdao zozg'
+DEFAULT_FROM_EMAIL = 'your_email@example.com'
+
+
+LOGIN_REDIRECT_URL ="hostelapp:index"
+LOGOUT_REDIRECT_URL = "hostelapp:index"
