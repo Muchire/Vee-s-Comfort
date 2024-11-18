@@ -1,28 +1,96 @@
 {% extends "base.html" %}
 {% load static %}
+
 {% block content %}
-
-<div class="container mx-auto mt-8">
-    <h1 class="text-4xl font-bold text-purple-900 mb-8">Book Your Stay at {{ hostel.name }}</h1>
-    <form method="post" class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+<div class="container mx-auto mt-4 text-purple-900 p-4 bg-purple-200 rounded-lg shadow-lg">
+    <h1 class="text-4xl font-bold mb-4">Book your stay at {{ hostel.name }}</h1>
+    
+    <form method="post" class="mt-4 p-4 border rounded-lg shadow-md bg-purple-100">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="bg-purple-400 hover:bg-purple-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Book Now</button>
+        <div class="mb-4">
+            {{ form.check_in.label_tag }} {{ form.check_in }}
+        </div>
+        <div class="mb-4">
+            {{ form.check_out.label_tag }} {{ form.check_out }}
+        </div>
+
+        <div class="mb-4">
+            <h2 class="text-3xl font-semibold mb-2">Meals we offer :</h2>
+            <div class="flex flex-wrap justify-center space-x-4">
+                {% if hostel.breakfast_menu %}
+                <div class="border rounded-lg p-2 shadow-md bg-purple-100 flex-grow">
+                    <h3 class="font-semibold mb-2">Breakfast</h3>
+                    <img src="{{ hostel.breakfast_menu.url }}" alt="Breakfast Menu" class="w-96 h-96 object-cover rounded-md">
+                    <div class="mt-2">
+                        {{ form.include_breakfast }}
+                        <label for="{{ form.include_breakfast.id_for_label }}">Include Breakfast</label>
+                    </div>
+                </div>
+                {% endif %}
+                {% if hostel.lunch_menu %}
+                <div class="border rounded-lg p-2 shadow-md bg-purple-100 flex-grow">
+                    <h3 class="font-semibold mb-2">Lunch</h3>
+                    <img src="{{ hostel.lunch_menu.url }}" alt="Lunch Menu" class="w-96 h-96 object-cover rounded-md">
+                    <div class="mt-2">
+                        {{ form.include_lunch }}
+                        <label for="{{ form.include_lunch.id_for_label }}">Include Lunch</label>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="mb-4">
+            <h2 class="text-2xl font-semibold mb-2">Other Services</h2>
+            <div class="flex flex-wrap justify-center space-x-4">
+                <div class="border rounded-lg p-2 shadow-md bg-purple-100 flex-grow">
+                    <h3 class="font-semibold mb-2">Room Service - 500 KSH</h3>
+                    <img src="{% static 'images/room_service.jpeg' %}" alt="Room Service" class="w-80 h-80 object-cover rounded-md">
+                    <p class="mt-2">For an additional 500 KSH, enjoy our convenient room service.</p>
+                    <div class="mt-2">
+                        {{ form.room_service }}
+                        <label for="{{ form.room_service.id_for_label }}">Include Room Service</label>
+                    </div>
+                </div>
+                <div class="border rounded-lg p-2 shadow-md bg-purple-100 flex-grow">
+                    <h3 class="font-semibold mb-2">Airport Pickup</h3>
+                    <img src="{% static 'images/airport_pickup.jpeg' %}" alt="Airport Pickup" class="w-80 h-80 object-cover rounded-md">
+                    <p class="mt-2">Airport pickup available for 500 KSH or 800 KSH depending on the car type.</p>
+                    <div class="mt-2">
+                        {{ form.airport_pickup_option }}
+                        <label for="{{ form.airport_pickup_option.id_for_label }}">Include Airport Pickup</label>
+                    </div>
+                    <div id="airport-pickup-details" class="mt-4">
+                        <p>
+                            {{ form.flight_number.label_tag }} {{ form.flight_number }}
+                        </p>
+                        <p>
+                            {{ form.pickup_time.label_tag }} {{ form.pickup_time }}
+                        </p>
+                        <p>
+                            {{ form.car_type.label_tag }} {{ form.car_type }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" class="bg-purple-500 text-white py-2 px-4 rounded hover:bg-purple-700">Submit</button>
     </form>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-
-        <div class="flex flex-col items-start mt-8">
-            <img class="rounded-t-lg float-right mr-4 mb-4" src="{% static 'images/Hostel6.jpeg' %}" alt="Card Image 1" />
-        </div>
-
-        <div class="flex flex-col items-start mt-8">
-            <img class="rounded-t-lg float-right mr-4 mb-4" src="{% static 'images/hostel7.jpeg' %}" alt="Card Image 1" />
-        </div>
-
-
-        <div class="flex flex-col items-start mt-8">
-            <img class="rounded-t-lg float-right mr-4 mb-4" src="{% static 'images/hostel8.jpeg' %}" alt="Card Image 1" />
-        </div>
-    </div>
 </div>
-{% endblock %}
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const airportPickupCheckbox = document.getElementById('id_airport_pickup_option');
+        const airportPickupDetails = document.getElementById('airport-pickup-details');
+
+        function togglePickupFields() {
+            const shouldShow = airportPickupCheckbox.checked;
+            airportPickupDetails.style.display = shouldShow ? 'block' : 'none';
+        }
+
+        airportPickupCheckbox.addEventListener('change', togglePickupFields);
+        togglePickupFields();  // Initial call to set the fields based on the initial state
+    });
+</script>
+{% endblock content %}

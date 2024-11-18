@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mx-auto mt-8">
+    <h1 class="text-4xl font-bold text-purple-900 mb-8 text-center">Payment Confirmation</h1>
+    <p>Thank you for your payment!</p>
+    <p>Booking Number: {{ payment.booking.room_number }}</p>
+    <p>Total Amount Paid: ${{ payment.amount }}</p>
+    <p>Payment Method: {{ payment.get_payment_method_display }}</p>
+    <p>Payment Status: {{ payment.status }}</p>
+    <a href="{% url 'hostelapp:index' %}" class="bg-purple-400 hover:bg-purple-500 text-white font-bold py-2 px-4 rounded mt-4 focus:outline-none focus:shadow-outline">Go to Home</a>
+</div>
+{% endblock %}
