@@ -64,6 +64,7 @@ def hostel_list(request):
 
 def hostel_detail(request, pk): 
     hostel = get_object_or_404(Hostel, pk=pk) 
+    print(hostel.images.all())
     return render(request, 'hostel_pages/hostel_detail.html', {'hostel': hostel})
 
 
